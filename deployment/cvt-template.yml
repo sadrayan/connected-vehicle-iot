@@ -5,7 +5,7 @@ Mappings:
     SourceCode:
         General:
             S3Bucket: "cvt-iot-250"
-            KeyPrefix: "CVT/1.1"
+            KeyPrefix: "dist"
 
 Resources:
 
@@ -15,13 +15,9 @@ Resources:
             Description: "AWS Connected Vehicle Solution deployment custom resource helper service"
             Code:
                 S3Bucket: !Join ["-", [!FindInMap ["SourceCode", "General", "S3Bucket"], Ref: "AWS::Region"]]
-                S3Key: !Join ["/", [!FindInMap ["SourceCode", "General", "KeyPrefix"],  "cv-deployment-helper.zip"]]
-            Handler: "index.handler"
-            FunctionName: !Sub "${AWS::StackName}-connected-vehicle-helper"
-            MemorySize: "256"
-            Role:
-                Fn::GetAtt:
-                    - "ConnectedVehicleHelperRole"
-                    - "Arn"
-            Runtime: "nodejs12.x"
-            Timeout: "300"
+                S3Key: !Join ["/", [!FindInMap ["SourceCode", "General", "KeyPrefix"],  "app.zip"]]
+            Handler: handler.handler
+            FunctionName: !Sub "${AWS::StackName}-cvt-upfit-function"
+            MemorySize: 512
+            Runtime: python3.7
+            Timeout: 300
