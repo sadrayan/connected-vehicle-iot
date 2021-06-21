@@ -29,30 +29,36 @@ jobs:
       # Step 3
       - name: Install Python Virtual ENV
         run: pip3 install virtualenv
-      # Step 5
+      # Step 4
       - name: Activate and Install Depencies into Virtual env
-        working-directory: ./src
-        run: python -m venv venv && source venv/bin/activate &&
-          pip3 install -r requirements.txt
-        if: steps.cache-venv.outputs.cache-hit != 'true'
-
-      # Step 7
-      - name: Create Zipfile archive of Dependencies
-        working-directory: ./src
         run: |
-          cd ./venv/lib/python3.7/site-packages
-          zip -r9 ../../../../../dist/app.zip .
-      
-      # Step 8
-      - name: Add App to Zip file
-        run: | 
           mkdir dist
           cd ./src
-          zip -g ../dist/app.zip -r .
-      
+          python -m venv venv && source venv/bin/activate 
+          pip3 install -r requirements.txt --target ../dist/
+        if: steps.cache-venv.outputs.cache-hit != 'true'
+      # Step 5
+      - name: zip the distribution
+        run: |
+          mkdir build
+          cp ./src/* ./dist
+          cd ./dist &&  zip ../build/app.zip -r .
+
       # Step 9
       - name: Upload zip file artifact
         uses: actions/upload-artifact@v2
         with:
           name: app
           path: dist/app.zip
+
+      - name: Push Zip to S3
+        uses: zdurham/s3-upload-github-action@master
+        with:
+          args: --acl public-read
+        env:
+          FILE: buildß/app.zip
+          AWS_REGION: 'us-east-2'
+          S3_BUCKET:  'cvt-iot-250'
+          S3_KEY: 'dist/'
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
