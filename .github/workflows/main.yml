@@ -72,7 +72,7 @@ jobs:
       - name: Deploy to AWS CloudFormation
         uses: aws-actions/aws-cloudformation-github-deploy@v1
         with:
-          name: CVT-IoT
+          name: CVT-IoT-dev
           template: ./deployment/cvt-template.yaml
           # parameter-overrides: "MyParam1=myValue,MyParam2=${{ secrets.MY_SECRET_VALUE }}"
 
