@@ -1,2 +1,2 @@
-Adafruit_PCA9685
-greengrasssdk
+Adafruit_PCA9685==1.0.1
+greengrasssdk==1.6.0
