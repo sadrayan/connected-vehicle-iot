@@ -26,7 +26,7 @@ jobs:
       - name: Print the Cloud Formation Linter Version & run Linter.
         run: |
           cfn-lint --version
-          cfn-lint -t ./deployment/cvt-template.yml
+          cfn-lint -t ./deployment/cvt-template.yaml
       
       # Step 2
       - name: Set up Python 
