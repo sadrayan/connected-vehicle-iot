@@ -1,5 +1,5 @@
 AWSTemplateFormatVersion: "2010-09-09"
-Description: (SO0036) - The AWS CloudFormation template for deployment of CVT - Upfit
+Description: The AWS CloudFormation template for deployment of CVT - Upfit
 
 Mappings:
   SourceCode:
