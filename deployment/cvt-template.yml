@@ -9,28 +9,28 @@ Mappings:
 
 Resources:
 
-    lambdaExecutionRole:
-        Type: AWS::IAM::Role
-        Properties:
-            AssumeRolePolicyDocument:
-                Version: "2012-10-17"
-                Statement:
-                    - Effect: "Allow"
-                    Principal:
-                        Service:
-                            - lambda.amazonaws.com
-                    Action:
-                        - sts:AssumeRole
-            Path: "/"
-            Policies:
-                - PolicyName: "booster-function-logs"
-                PolicyDocument:
-                    Version: "2012-10-17"
-                    Statement:
-                        - Effect: "Allow"
-                            Action:
-                                - "Logs:*"
-                            Resource: "arn:aws:logs:*:*:*"
+  LambdaExecutionRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+        - Effect: Allow
+          Principal:
+            Service:
+            - lambda.amazonaws.com
+          Action:
+          - sts:AssumeRole
+      Path: "/"
+      Policies:
+      - PolicyName: root
+        PolicyDocument:
+          Version: '2012-10-17'
+          Statement:
+          - Effect: Allow
+            Action:
+            - logs:*
+            Resource: arn:aws:logs:*:*:*
 
     CVTUpfitFunction:
         Type: "AWS::Lambda::Function"
@@ -41,10 +41,10 @@ Resources:
                 S3Key: !Join ["/", [!FindInMap ["SourceCode", "General", "KeyPrefix"],  "app.zip"]]
             Handler: handler.handler
             Role:
-                Fn::GetAtt: lambdaExecutionRole.Arn
+                Fn::GetAtt: LambdaExecutionRole.Arn
             FunctionName: !Sub "${AWS::StackName}-cvt-upfit-function"
             MemorySize: 512
             Runtime: python3.7
             Timeout: 300
         DependsOn:
-            - lambdaExecutionRole
+            - LambdaExecutionRole
