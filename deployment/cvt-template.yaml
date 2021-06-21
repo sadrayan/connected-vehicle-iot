@@ -2,25 +2,25 @@ AWSTemplateFormatVersion: "2010-09-09"
 Description: (SO0036) - The AWS CloudFormation template for deployment of CVT - Upfit
 
 Mappings:
-    SourceCode:
-        General:
-            S3Bucket: "cvt-iot-250"
-            KeyPrefix: "dist"
+  SourceCode:
+    General:
+      S3Bucket: "cvt-iot-250"
+      KeyPrefix: "dist"
 
 Resources:
   CVTUpfitFunction:
-      Type: "AWS::Lambda::Function"
-      Properties:
-          Description: "AWS Connected Vehicle Upfit Solution deployment "
-          Code:
-              S3Bucket: !Join ["-", [!FindInMap ["SourceCode", "General", "S3Bucket"], Ref: "AWS::Region"]]
-              S3Key: !Join ["/", [!FindInMap ["SourceCode", "General", "KeyPrefix"],  "app.zip"]]
-          Handler: handler.handler
-          Role: !GetAtt LambdaExecutionRole.Arn
-          FunctionName: !Sub "${AWS::StackName}-cvt-upfit-function"
-          MemorySize: 512
-          Runtime: python3.7
-          Timeout: 300
+    Type: "AWS::Lambda::Function"
+    Properties:
+      Description: "AWS Connected Vehicle Upfit Solution deployment "
+      Code:
+        S3Bucket: !Join ["-", [!FindInMap ["SourceCode", "General", "S3Bucket"], Ref: "AWS::Region"]]
+        S3Key: !Join ["/", [!FindInMap ["SourceCode", "General", "KeyPrefix"],  "app.zip"]]
+      Handler: handler.handler
+      Role: !GetAtt LambdaExecutionRole.Arn
+      FunctionName: !Sub "${AWS::StackName}-cvt-upfit-function"
+      MemorySize: 512
+      Runtime: python3.7
+      Timeout: 300
   LambdaExecutionRole:
     Type: AWS::IAM::Role
     Properties:
