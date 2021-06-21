@@ -2,6 +2,7 @@
 .Python
 env/
 venv/
+dist/
 build/
 develop-eggs/
 dist/
@@ -16,3 +17,4 @@ var/
 *.egg-info/
 .installed.cfg
 *.egg
+.DS_Store

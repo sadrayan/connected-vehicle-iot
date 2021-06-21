@@ -32,7 +32,7 @@ jobs:
       # Step 4
       - name: Activate and Install Depencies into Virtual env
         run: |
-          mkdir dist
+          mkdir dist && cp ./src/* ./dist
           cd ./src
           python -m venv venv && source venv/bin/activate 
           pip3 install -r requirements.txt --target ../dist/
@@ -41,7 +41,6 @@ jobs:
       - name: zip the distribution
         run: |
           mkdir build
-          cp ./src/* ./dist
           cd ./dist &&  zip ../build/app.zip -r .
 
       # Step 9
