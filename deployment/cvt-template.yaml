@@ -21,6 +21,17 @@ Resources:
       MemorySize: 512
       Runtime: python3.7
       Timeout: 300
+  version:
+    Type: AWS::Lambda::Version
+    Properties:
+      FunctionName: !Ref CVTUpfitFunction
+      Description: v1
+  alias:
+    Type: AWS::Lambda::Alias
+    Properties:
+      FunctionName: !Ref CVTUpfitFunction
+      FunctionVersion: !GetAtt version.Version
+      Name: dev
   LambdaExecutionRole:
     Type: AWS::IAM::Role
     Properties:
