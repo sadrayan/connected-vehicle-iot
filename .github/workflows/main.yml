@@ -55,7 +55,7 @@ jobs:
         with:
           args: --acl public-read
         env:
-          FILE: buildß/app.zip
+          FILE: build/app.zip
           AWS_REGION: 'us-east-2'
           S3_BUCKET:  'cvt-iot-250'
           S3_KEY: 'dist/'
