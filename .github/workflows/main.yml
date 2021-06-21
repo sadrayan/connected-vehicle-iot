@@ -41,7 +41,7 @@ jobs:
         working-directory: ./src
         run: |
           cd ./venv/lib/python3.7/site-packages
-          zip -r9 ../../../../app.zip .
+          zip -r9 ../../../../../dist/app.zip .
       
       # Step 8
       - name: Add App to Zip file
