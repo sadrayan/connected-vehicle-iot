@@ -10,27 +10,27 @@ Mappings:
 Resources:
 
     lambdaExecutionRole:
-            Type: AWS::IAM::Role
-            Properties:
-                AssumeRolePolicyDocument:
+        Type: AWS::IAM::Role
+        Properties:
+            AssumeRolePolicyDocument:
+                Version: "2012-10-17"
+                Statement:
+                    - Effect: "Allow"
+                    Principal:
+                        Service:
+                            - lambda.amazonaws.com
+                    Action:
+                        - sts:AssumeRole
+            Path: "/"
+            Policies:
+                - PolicyName: "booster-function-logs"
+                PolicyDocument:
                     Version: "2012-10-17"
                     Statement:
                         - Effect: "Allow"
-                        Principal:
-                            Service:
-                                - lambda.amazonaws.com
-                        Action:
-                            - sts:AssumeRole
-                Path: "/"
-                Policies:
-                    - PolicyName: "booster-function-logs"
-                    PolicyDocument:
-                        Version: "2012-10-17"
-                        Statement:
-                            - Effect: "Allow"
-                                Action:
-                                    - "Logs:*"
-                                Resource: "arn:aws:logs:*:*:*"
+                            Action:
+                                - "Logs:*"
+                            Resource: "arn:aws:logs:*:*:*"
 
     CVTUpfitFunction:
         Type: "AWS::Lambda::Function"
