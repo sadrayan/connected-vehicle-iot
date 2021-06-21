@@ -1,2 +1,3 @@
 Adafruit_PCA9685==1.0.1
 greengrasssdk==1.6.0
+# rpi-ws281x==1.1.3

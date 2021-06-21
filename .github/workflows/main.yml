@@ -55,7 +55,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: app
-          path: dist/app.zip
+          path: build/app.zip
       # Step 7
       - name: Push Zip to S3
         uses: zdurham/s3-upload-github-action@master
