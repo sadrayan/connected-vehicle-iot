@@ -42,6 +42,7 @@ jobs:
         run: |
           mkdir dist && cp ./src/* ./dist
           cd ./src
+          python -m pip install --upgrade pip
           python -m venv venv && source venv/bin/activate 
           pip3 install -r requirements.txt --target ../dist/
         if: steps.cache-venv.outputs.cache-hit != 'true'
