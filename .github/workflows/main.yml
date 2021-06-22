@@ -20,6 +20,12 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: us-east-2
 
+      - name: Set UUID
+        id: generate-uuid
+        uses: filipstefansson/uuid-action@v1
+        with:
+          name: ${{ gihub.sha }}
+          
       - name: Setup Cloud Formation Linter with Latest Version
         uses: scottbrenner/cfn-lint-action@v2
 
@@ -66,7 +72,7 @@ jobs:
           FILE: build/app.zip
           AWS_REGION: 'us-east-2'
           S3_BUCKET:  'cvt-iot-250'
-          S3_KEY: 'dist/'
+          S3_KEY: "dist/${{ steps.generate-uuid.outputs.uuid }}/"
       - name: Push Zip to S3
         uses: zdurham/s3-upload-github-action@master
         with:
@@ -75,14 +81,14 @@ jobs:
           FILE: ./deployment/cvt-template.yaml
           AWS_REGION: 'us-east-2'
           S3_BUCKET:  'cvt-iot-250'
-          S3_KEY: 'dist/'
+          S3_KEY: "dist/${{ steps.generate-uuid.outputs.uuid }}/"
       # Step 8
       - name: Deploy to AWS CloudFormation
         id: cvt-stack
         uses: aws-actions/aws-cloudformation-github-deploy@v1
         with:
           name: CVT-IoT-dev
-          template: https://cvt-iot-250.s3.us-east-2.amazonaws.com/dist/cvt-template.yaml
+          template: "https://cvt-iot-250.s3.us-east-2.amazonaws.com/dist/${{ steps.generate-uuid.outputs.uuid }}/cvt-template.yaml"
           no-fail-on-empty-changeset: "1"
           no-execute-changeset: 1
           # parameter-overrides: "MyParam1=myValue,MyParam2=${{ secrets.MY_SECRET_VALUE }}"
