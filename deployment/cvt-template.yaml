@@ -1,5 +1,5 @@
 AWSTemplateFormatVersion: "2010-09-09"
-Description: The AWS CloudFormation template for deployment of CVT - Upfit
+Description: The AWS CloudFormation template for deployment of CVT - SmartBox
 
 Mappings:
   SourceCode:
@@ -8,28 +8,28 @@ Mappings:
       KeyPrefix: "dist"
 
 Resources:
-  CVTUpfitFunction:
+  CVTSmartBoxFunction:
     Type: "AWS::Lambda::Function"
     Properties:
-      Description: "AWS Connected Vehicle Upfit Solution deployment "
+      Description: "AWS Connected Vehicle SmartBox Solution deployment "
       Code:
         S3Bucket: !FindInMap ["SourceCode", "General", "S3Bucket"]
         S3Key: !Join ["/", [!FindInMap ["SourceCode", "General", "KeyPrefix"],  "app.zip"]]
       Handler: handler.handler
       Role: !GetAtt LambdaExecutionRole.Arn
-      FunctionName: !Sub "${AWS::StackName}-cvt-upfit-function"
+      FunctionName: !Sub "${AWS::StackName}-cvt-SmartBox-function"
       MemorySize: 512
       Runtime: python3.7
       Timeout: 300
   version:
     Type: AWS::Lambda::Version
     Properties:
-      FunctionName: !Ref CVTUpfitFunction
+      FunctionName: !Ref CVTSmartBoxFunction
       Description: v1
   alias:
     Type: AWS::Lambda::Alias
     Properties:
-      FunctionName: !Ref CVTUpfitFunction
+      FunctionName: !Ref CVTSmartBoxFunction
       FunctionVersion: !GetAtt version.Version
       Name: dev
   LambdaExecutionRole:
