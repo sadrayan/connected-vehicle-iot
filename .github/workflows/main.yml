@@ -78,10 +78,12 @@ jobs:
           S3_KEY: 'dist/'
       # Step 8
       - name: Deploy to AWS CloudFormation
+        id: cvt-stack
         uses: aws-actions/aws-cloudformation-github-deploy@v1
         with:
           name: CVT-IoT-dev
           template: https://cvt-iot-250.s3.us-east-2.amazonaws.com/dist/cvt-template.yaml
           no-fail-on-empty-changeset: "1"
+          no-execute-changeset: 1
           # parameter-overrides: "MyParam1=myValue,MyParam2=${{ secrets.MY_SECRET_VALUE }}"
 
