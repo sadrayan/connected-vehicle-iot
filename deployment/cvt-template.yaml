@@ -4,7 +4,7 @@ Description: The AWS CloudFormation template for deployment of CVT - SmartBox
 
 Parameters: # params passed to "--parameter-overrides" in CLI
   AppVersion:
-    Description: Unique name for your bucket. This will be in the S3 url to your React app.
+    Description: Unique app version
     Type: String
 
 Mappings:
