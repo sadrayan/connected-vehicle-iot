@@ -21,7 +21,7 @@ class Helper:
     def getBattery(self):
         try:
             while True:
-                Power=adc.readAdc(0)/255.0*5.0*3
+                Power=self.adc.readAdc(0)/255.0*5.0*3
                 print ("The battery voltage is "+str(Power)+"V")
                 time.sleep(1)
                 print ('\n')
