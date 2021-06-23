@@ -23,7 +23,7 @@ Resources:
         S3Key: !Join ["/", [!FindInMap ["SourceCode", "General", "KeyPrefix"], !Ref AppVersion, "app.zip"] ]
       Handler: handler.handler
       Role: !GetAtt LambdaExecutionRole.Arn
-      FunctionName: !Sub "${AWS::StackName}-cvt-SmartBox-function"
+      FunctionName: !Sub "${AWS::StackName}-SmartBox-function"
       MemorySize: 512
       Runtime: python3.7
       Timeout: 300
@@ -31,7 +31,7 @@ Resources:
     Type: AWS::Lambda::Version
     Properties:
       FunctionName: !Ref CVTSmartBoxFunction
-      Description: v1
+      Description: !Ref AppVersion  
   alias:
     Type: AWS::Lambda::Alias
     Properties:
