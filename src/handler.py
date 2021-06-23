@@ -26,7 +26,7 @@ def handeler(event, context):
     else:
         print ("Not a valid Vehicle")
     
-    print('calling servokk')
+    print('calling servo')
     helper.test_Servo()
 
     return response
