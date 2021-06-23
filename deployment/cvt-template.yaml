@@ -31,7 +31,7 @@ Resources:
     Type: AWS::Lambda::Version
     Properties:
       FunctionName: !Ref CVTSmartBoxFunction
-      Description: !Ref AppVersion  
+      Description: v1 
   alias:
     Type: AWS::Lambda::Alias
     Properties:
