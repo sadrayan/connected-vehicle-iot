@@ -7,7 +7,7 @@ import time
 class Helper:
     def __init__(self):
         # self.adc=ADS7830()
-        self.led=Led()
+        # self.led=Led()
         self.servo=Servo()
         self.battery_voltage=[8.4,8.4,8.4,8.4,8.4]
         self.colorWipeMap = { 
