@@ -1,0 +1,11 @@
+{
+    "targetArn": "arn:aws:iot:us-east-2:575711874019:thing/CTV-250-GreengrassCore",
+    "components": {
+      "CVTLambda": {
+        "componentVersion": "1.0.5",
+        "configurationUpdate": {
+          "merge": "{\"pythonVersion\":\"3.7\"}"
+        }
+      }
+    }
+  }
