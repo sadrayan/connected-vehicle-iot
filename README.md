@@ -27,8 +27,10 @@ $ sudo chmod 755 /greengrass/v2 && sudo chmod 755 /greengrass
 ```
 
 ```
+$ sudo systemctl start greengrass.service
+$ sudo systemctl stop greengrass.service
+$ sudo systemctl restart greengrass.service
 $ sudo systemctl status greengrass.service
-
 ```
 
 

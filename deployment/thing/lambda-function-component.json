@@ -1,0 +1,7 @@
+{
+    "lambdaFunction": {
+      "lambdaArn": "arn:aws:lambda:us-east-2:575711874019:function:CVT-IoT-dev-SmartBox-function:4",
+      "componentName": "CVTLambda",
+      "componentVersion": "1.0.5"
+    }
+  }
