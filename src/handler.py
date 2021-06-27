@@ -29,11 +29,11 @@ def handeler(event, context):
     #     print ("Not a valid Vehicle")
 
     client.publish(topic='cvt/smartbox', payload=json.dumps(event))
-    print(response)    
+       
     print('calling servo')
     helper.test_Servo()
-
+    print(response) 
     return response
 
-if __name__ == '__main__':
-    handeler(json.dumps({'event' : 1}))
+# if __name__ == '__main__':
+#     handeler({'event' : 1}, {})
