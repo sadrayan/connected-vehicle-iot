@@ -9,7 +9,7 @@ import boto3
 client = boto3.client("iot-data")
 helper = Helper()
 
-def handeler(event, context):
+def handler(event, context):
     body = {
         "message": "Go Serverless v1.0! Your function executed successfully!",
         "input": event
@@ -36,4 +36,4 @@ def handeler(event, context):
     return response
 
 # if __name__ == '__main__':
-#     handeler({'event' : 1}, {})
+#     handler({'event' : 1}, {})
